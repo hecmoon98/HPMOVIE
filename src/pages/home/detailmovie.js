@@ -50,6 +50,7 @@ class DetailMovie extends Component {
     console.log(this.props)
     const id = this.props.match.params.id;
     this.props.getDetailMovie(id);
+    this.props.setLoading()
   }
 
   renderRap = () => {
@@ -61,28 +62,7 @@ class DetailMovie extends Component {
   };
 
   renderNgayChieu = keyWord => {
-    // var arr = [{"shape":"square","color":"red","used":1,"instances":1},{"shape":"square","color":"red","used":2,"instances":1},{"shape":"circle","color":"blue","used":0,"instances":0},{"shape":"square","color":"blue","used":4,"instances":4},{"shape":"circle","color":"red","used":1,"instances":1},{"shape":"circle","color":"red","used":1,"instances":0},{"shape":"square","color":"blue","used":4,"instances":5},{"shape":"square","color":"red","used":2,"instances":1}];
 
-    // var helper = {};
-
-    // var resulttt = arr.reduce((r, o)=> {
-    //   var key = o.shape + '-' + o.color;
-    //   console.log(key)
-
-    //   if(!helper[key]) {
-    //     helper[key] = Object.assign({}, o); // create a copy of o
-    //     console.log(helper[key]);
-
-    //     r.push(helper[key]);
-    //   } else {
-    //     helper[key].used += o.used;
-    //     helper[key].instances += o.instances;
-    //   }
-
-    //   return r;
-    // }, []);
-
-    // console.log(resulttt);
 
     if (this.props.movie.lichChieu) {
       const mang = this.props.movie.lichChieu.filter(item => {
@@ -257,7 +237,18 @@ class DetailMovie extends Component {
   };
 
   render() {
-    const { movie } = this.props;
+    let { movie, loading } = this.props;
+
+    if(loading){
+      return(
+        <div className="loading">
+
+         <div class="loader"></div>
+
+        </div>
+      )
+    }
+
 
     return (
       <div className="DetailMovie">
@@ -474,19 +465,21 @@ class DetailMovie extends Component {
 const mapStateToProps = state => {
   console.log(state.movieReducer.movie)
   return {
-    movie: state.movieReducer.movie
+    movie: state.movieReducer.movie,
+    loading:state.movieReducer.loading
   };
 };
 
 const mapDispatchToProps = dispatch => {
+
   return {
     getDetailMovie: id => {
-      // let action = {
-      //     type: "GET_LIST_MOVIE",
-      //     listMovie
-      // }
       dispatch(action.actGetDetailMovie(id));
-    }
+    },
+
+    setLoading: () => {
+      dispatch(action.actLoading());
+    },
   };
 };
 

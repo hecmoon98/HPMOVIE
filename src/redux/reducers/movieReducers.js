@@ -5,7 +5,8 @@ let initialState ={
     movie: {},
     listCinema: [],
     listCumRap:[],
-    listThongTin:{}
+    listThongTin:{},
+    loading:false
 
  
 }
@@ -22,7 +23,7 @@ const movieReducer = (state = initialState, action)=>{
             state.movie = action.movie;
            
             
-        return {...state}
+        return {...state,loading:false}
 
         case ActionType.GET_LIST_CINEMA:
            
@@ -32,6 +33,10 @@ const movieReducer = (state = initialState, action)=>{
            
             
         return {...state}
+
+        case ActionType.LOADING:
+
+        return {...state, loading:true}
         
 
         case ActionType.GET_LIST_CUM_RAP:

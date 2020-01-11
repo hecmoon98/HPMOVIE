@@ -43,13 +43,13 @@ class Cinema extends Component {
       return (
    
         <div
-          
+          ket={index}
           className={classRap}
           onClick={() => {
             this.keyRap(index, item.maHeThongRap);
           }}
         >
-          <img src={item.logo} alt="" />
+          <img src={item.logo} alt="#123" />
           <p>{item.maHeThongRap}</p>
         </div>
 
@@ -67,7 +67,7 @@ class Cinema extends Component {
   render() {
     return (
       <section id="cumrap" className="cinema">
-        <div class="clear"></div>
+        <div className="clear"></div>
         <div className="cinema__content">
           <div className="container">
             <div className="row">

@@ -7,3 +7,5 @@ export const GET_LIST_CINEMA = "GET_LIST_CINEMA";
 export const GET_LIST_CUM_RAP = "GET_LIST_CUM_RAP";
 
 export const GET_THONG_TIN_LICH_CHIEU = "GET_THONG_TIN_LICH_CHIEU";
+
+export const LOADING = "LOADING";

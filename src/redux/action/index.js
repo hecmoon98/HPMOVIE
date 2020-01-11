@@ -129,3 +129,10 @@ export const actLoginAdmin = (user, history) => {
         });
     };
   };
+export const actLoading = () => {
+    return {
+        type: ActionType.LOADING,
+    };
+  };
+
+  

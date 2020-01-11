@@ -1,6 +1,50 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { connect } from "react-redux";
+import { compose } from 'redux';
+import movie from './movie';
 
-export default class Banner extends Component {
+
+class Banner extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+     movie:"Mời Bạn Chon Phim...",
+     movieTF:false
+    };
+   
+  }
+
+  handlMovie=(movie,maphim,tf)=>{
+    console.log(movie,maphim)
+    this.setState({
+      movie:movie,
+      movieTF:tf
+    })
+
+  }
+  handlMovieTF=(tf)=>{
+    if(tf==false){
+      tf=true
+    }else{
+      tf=false
+    }
+    this.setState({
+      movieTF:tf
+    })
+
+  }
+
+  renderMovie = () => {
+    
+    
+    return this.props.listMovie.map((movie, index) => {
+      return <li onClick={()=>{this.handlMovie(movie.tenPhim,movie.maPhim,false)}} key={index} className="tab__li_2">{movie.tenPhim} </li>;
+    });
+  };
+
+
+
     render() {
         return (
             <section className="banner">
@@ -37,18 +81,39 @@ export default class Banner extends Component {
       <span className="carousel-control-next-icon" aria-hidden="true" />
       <span className="sr-only">Next</span>
     </a>
+
+
+
     <div className="banner__list">
-      <ul>
-        <li><a href="#">Phim</a><i className="fa fa-angle-down" /></li>
-        <li><a href="#">Rạp</a><i className="fa fa-angle-down" /></li>
-        <li><a href="#">Ngày xem</a><i className="fa fa-angle-down" /></li>
-        <li><a href="#">Suất chiếu</a><i className="fa fa-angle-down" /></li>
-        <li><button className="btn ">MUA VÉ NGAY</button></li>
+      <ul className="tab__ul_1">
+
+      <ul className={this.state.movieTF ? "tab__ul_2 tf":"tab__ul_2"}>
+            {this.renderMovie()}
+          </ul>
+        <li onClick={()=>{this.handlMovieTF(this.state.movieTF)}} className="tab__li_1">{this.state.movie}
+        </li>
+        <li className="tab__li_1">Rạp</li>
+        <li className="tab__li_1">Ngày xem</li>
+        <li className="tab__li_1">Suất chiếu</li>
+        <li className="tab__li_1"><button disabled className="btn ">MUA VÉ NGAY</button></li>
+        
       </ul>
     </div>
+
+
+
   </div>
 </section>
 
         )
     }
 }
+
+const mapStateToProps = state => {
+  return {
+    listMovie: state.movieReducer.listMovie
+  };
+};
+
+
+export default connect(mapStateToProps, null)(Banner);
