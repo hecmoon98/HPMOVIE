@@ -7,6 +7,8 @@ class TicketMovie extends Component {
         const id = this.props.match.params.id;
         console.log(this.props.match.params.id);
         this.props.getPhongVe(id);
+        this.props.setLoading();
+        
     }
 
     renderGhe = () => {
@@ -47,9 +49,21 @@ class TicketMovie extends Component {
 
 
     render() {
+        let { loading } = this.props;
+        console.log(loading)
+
+    if(loading){
+      return(
+        <div className="loading">
+
+         <div class="loader"></div>
+
+        </div>
+      )
+    }
 
 
-        // const { listPhongVe } = this.props;
+        
         return (
             <div className="ticKet">
                 <section className="headerticket">
@@ -122,7 +136,9 @@ class TicketMovie extends Component {
 
 const mapStateToProps = state => {
     return {
-        listPhongVe: state.movieReducer.listPhongVe
+        listPhongVe: state.movieReducer.listPhongVe,
+    loading:state.movieReducer.loading
+        
 
     }
 };
@@ -133,7 +149,11 @@ const mapDispatchToProps = dispatch => {
         getPhongVe: (id) => {
             dispatch(action.actGetPhongVe(id));
 
-        }
+        },
+
+        setLoading: () => {
+            dispatch(action.actLoading());
+          },
 
     }
 };

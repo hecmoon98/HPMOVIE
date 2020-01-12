@@ -125,7 +125,7 @@ class ThongTinLichChieu extends Component {
               {lichChieu.map((item, index) => {
                 
                 return (
-                  <Link key={index} to="/" className="date_time">
+                  <Link key={index} to={`/ticket-movie/${item.maLichChieu}`} className="date_time">
                     {new Date(item.ngayChieuGioChieu).toLocaleTimeString()}
                   </Link>
                 );

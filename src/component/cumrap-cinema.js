@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import {connect} from "react-redux";
-import * as action from "../redux/action";
+
 
 class CumrapCinema extends Component {
     constructor(props) {

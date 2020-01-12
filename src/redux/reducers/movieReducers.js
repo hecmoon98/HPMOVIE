@@ -55,7 +55,7 @@ const movieReducer = (state = initialState, action) => {
 
         case ActionType.GET_LIST_PHONG_VE:
             state.listPhongVe = action.getPhongVe
-            return { ...state };
+            return { ...state, loading: false };
 
         default:
             return { ...state }

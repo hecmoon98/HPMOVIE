@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { compose } from "redux";
-import movie from "./movie";
+import { Link } from "react-router-dom";
 import * as action from "./../redux/action";
 
 class Banner extends Component {
@@ -20,7 +19,8 @@ class Banner extends Component {
       ngayXemTF: false,
 
       suatChieu: "Suất Chiếu",
-      suatChieuTF: false
+      suatChieuTF: false,
+      maLichChieu:""
     };
   }
 
@@ -95,13 +95,14 @@ class Banner extends Component {
   }
 
 
-  handlsuatChieu=(suatChieu, suatChieuTF)=>{
+  handlsuatChieu=(suatChieu, suatChieuTF,maLichChieu)=>{
    
  
  
     this.setState({
       suatChieu,
-        suatChieuTF
+        suatChieuTF,
+        maLichChieu
      
     });
   }
@@ -287,7 +288,7 @@ class Banner extends Component {
           return(
             <li
             onClick={() => {
-              this.handlsuatChieu(new Date(item.ngayChieuGioChieu).toLocaleTimeString(),false);
+              this.handlsuatChieu(new Date(item.ngayChieuGioChieu).toLocaleTimeString(),false,item.maLichChieu);
             }}
             key={index}
             className="tab__li_2"
@@ -296,7 +297,8 @@ class Banner extends Component {
           </li>
           )
         })
-      }else{return (
+      }else{
+        return (
         <li
           className="tab__li_2"
         >
@@ -439,9 +441,9 @@ class Banner extends Component {
                 
               </li>
               <li className="tab__li_1">
-                <button disabled className="btn ">
+                <Link to={`/ticket-movie/${this.state.maLichChieu}`} className="btn ">
                   MUA VÉ NGAY
-                </button>
+                </Link>
               </li>
             </ul>
           </div>
