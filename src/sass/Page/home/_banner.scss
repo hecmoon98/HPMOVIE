@@ -39,7 +39,6 @@
         display: flex;
         margin: 0;
         align-items: center;
-        position: relative;
 
         .tab__ul_2.tf{
           display: block;
@@ -53,7 +52,7 @@
           position: absolute;
           background: red;
           left: 0;
-          top: 60px;
+          top: 42px;
           padding: 5px 0;
           margin: 2px 0 0;
           font-size: 14px;
@@ -82,8 +81,9 @@
         
         .tab__li_1{
 
-          overflow: hidden;
-          text-overflow: ellipsis;
+          // overflow: hidden;
+          position: relative;
+          // text-overflow: ellipsis;
           white-space: nowrap;
           list-style: none;
           width: 20%;
@@ -103,7 +103,10 @@
 
 
           }
-         
+         .li__title{
+            overflow: hidden;
+            text-overflow: ellipsis;
+         }
           
           a{
 

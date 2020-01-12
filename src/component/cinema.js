@@ -43,7 +43,7 @@ class Cinema extends Component {
       return (
    
         <div
-          ket={index}
+          key={index}
           className={classRap}
           onClick={() => {
             this.keyRap(index, item.maHeThongRap);
