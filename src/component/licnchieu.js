@@ -24,9 +24,7 @@ export default class LicnChieu extends Component {
                                 </div>
                                 
                                 { mang2.map((item,index)=>{
-                                    let linkDatVe=`/${item.maLichChieu}`
-                                    console.log(linkDatVe);
-                                 return <Link key={index} to={linkDatVe} className="date_time" >{new Date(item.ngayChieuGioChieu).toLocaleTimeString()}</Link>
+                                 return <Link key={index} to={`/ticket-movie/${item.maLichChieu}`} className="date_time" >{new Date(item.ngayChieuGioChieu).toLocaleTimeString()}</Link>
                                 })}
                                 
                                 <div className="clearrr"></div>

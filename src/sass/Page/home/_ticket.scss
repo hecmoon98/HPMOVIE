@@ -1,0 +1,60 @@
+.ticket {
+  margin-left: 4.3%;
+  margin-top: 80px;
+  float: left;
+  padding-top: 30px;
+  width: 69.7%;
+  .screen {
+    text-align: center;
+    .namescreen {
+      width: 90%;
+    }
+  }
+  .tableGhe {
+    width: 100%;
+    padding: 0 200px;
+    .styleGhe {
+      float: left;
+      width: 25px;
+      font-weight: 600;
+      font-size: 1em;
+      padding-top: 7px;
+      height: 25px;
+      background-color: #3e515d;
+      margin: 5px;
+      margin-right: 10px;
+      cursor: pointer;
+      border-radius: 5px;
+      box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3), 0px 1px 0px 0px rgba(255, 255, 255, 0.8);
+      &:hover {
+        background-color: #e9204f;
+      }
+    }
+  }
+
+  .noteticket {
+    clear: both;
+    padding-top: 50px;
+    text-align: center;
+    span {
+      margin-right: 21px;
+      display: inline-block;
+      .colorseat {
+        height: 10px;
+        width: 10px;
+        display: inline-block;
+        border-radius: 2px;
+        margin-right: 6px;
+      }
+      .colornormal {
+        background-color: #3e515d;
+      }
+      .colorchoose {
+        background-color: #e9204f;
+      }
+      .colorchosen {
+        background-color: rgba(16, 34, 53, 0.2);
+      }
+    }
+  }
+}
