@@ -217,24 +217,51 @@ class Banner extends Component {
         return r;
       }, []);
       
-      return ngayXem.map((ngayXem,index)=>{
-        return ( 
-        <li
-          onClick={() => {
-            this.handlNgayXem(new Date(ngayXem.ngayChieuGioChieu).toLocaleDateString(),false);
-          }}
-          key={index}
-          className="tab__li_2"
-        >
-          {new Date(ngayXem.ngayChieuGioChieu).toLocaleDateString()}
-        </li>
-        );
-      })
+      if(ngayXem.length > 0 ){
+        return ngayXem.map((ngayXem,index)=>{
+          return ( 
+          <li
+            onClick={() => {
+              this.handlNgayXem(new Date(ngayXem.ngayChieuGioChieu).toLocaleDateString(),false);
+            }}
+            key={index}
+            className="tab__li_2"
+          >
+            {new Date(ngayXem.ngayChieuGioChieu).toLocaleDateString()}
+          </li>
+          );
+        })
+      }else{
+
+        return (
+          <li
+            className="tab__li_2"
+          >
+            Vui lòng chon rạp
+          </li>
+        )
+
+      }
+
+
 
       
 
 
     }
+
+
+    return (
+      <li
+        className="tab__li_2"
+      >
+        Vui lòng chon rạp
+      </li>
+    )
+
+    
+
+   
 
 
 
@@ -255,36 +282,39 @@ class Banner extends Component {
       });
 
 
-      return mang2.map((item,index)=>{
-        return(
-          <li
-          onClick={() => {
-            this.handlsuatChieu(new Date(item.ngayChieuGioChieu).toLocaleTimeString(),false);
-          }}
-          key={index}
+      if(mang2.length>0){
+        return mang2.map((item,index)=>{
+          return(
+            <li
+            onClick={() => {
+              this.handlsuatChieu(new Date(item.ngayChieuGioChieu).toLocaleTimeString(),false);
+            }}
+            key={index}
+            className="tab__li_2"
+          >
+            {new Date(item.ngayChieuGioChieu).toLocaleTimeString()}
+          </li>
+          )
+        })
+      }else{return (
+        <li
           className="tab__li_2"
         >
-          {new Date(item.ngayChieuGioChieu).toLocaleTimeString()}
+          Vui lòng chon ngày xem
         </li>
-        )
-      })
-
-
-
-
-
-      
-
-
-      
-
-
-
-
-
+      )}
 
     }
 
+
+    
+    return (
+      <li
+        className="tab__li_2"
+      >
+        Vui lòng chon ngày xem
+      </li>
+    )
 
     
   }
