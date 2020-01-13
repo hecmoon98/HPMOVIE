@@ -4,6 +4,7 @@ import DetailMovie from "./pages/home/detailmovie";
 import Dashboard from "./pages/admin/Dashboard";
 import ThemNguoiDung from "./pages/admin/ThemNguoiDung";
 import TicketMovie from "./pages/home/ticket-movie";
+import Ticket from "./pages/home/Ticket";
 
 
 
@@ -24,6 +25,12 @@ const routesHome = [
     path: "/ticket-movie/:id",
     exact: false,
     component: TicketMovie
+  },
+
+  {
+    path: "/ticket",
+    exact: false,
+    component: Ticket
   },
 
 ];

@@ -11,3 +11,5 @@ export const GET_THONG_TIN_LICH_CHIEU = "GET_THONG_TIN_LICH_CHIEU";
 export const LOADING = "LOADING";
 
 export const GET_LIST_PHONG_VE = "GET_LIST_PHONG_VE";
+
+export const POST_DAT_VE = "POST_DAT_VE";

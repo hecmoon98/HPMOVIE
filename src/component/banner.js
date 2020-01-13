@@ -441,8 +441,10 @@ class Banner extends Component {
                 
               </li>
               <li className="tab__li_1">
-                <Link to={`/ticket-movie/${this.state.maLichChieu}`} className="btn ">
+              <Link to={`/ticket-movie/${this.state.maLichChieu}`} className="btn ">
+                <button to={`/ticket-movie/${this.state.maLichChieu}`} className="btn ">
                   MUA VÉ NGAY
+                </button>
                 </Link>
               </li>
             </ul>

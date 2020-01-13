@@ -143,7 +143,7 @@ export const actGetPhongVe = (idLC) => {
             url: `http://movie0706.cybersoft.edu.vn/api/QuanLyDatVe/LayDanhSachPhongVe?MaLichChieu=${idLC}`
         })
             .then(result => {
-                console.log(result.data);
+            
 
                 dispatch({
                     type: ActionType.GET_LIST_PHONG_VE,
@@ -157,3 +157,29 @@ export const actGetPhongVe = (idLC) => {
     };
 };
 
+
+
+export const actDatVe = (user) => {
+
+    const UserAdmin = JSON.parse(localStorage.getItem("UserAdmin"));
+  
+    return dispatch => {
+      Axios({
+        method: "POST",
+        url:"http://movie0706.cybersoft.edu.vn/api/QuanLyDatVe/DatVe",
+        data: user,
+        headers: {
+          Authorization: `Bearer ${UserAdmin.accessToken}` 
+        }
+      })
+        .then(result => {
+          dispatch({
+            type: ActionType.POST_DAT_VE,
+            listMovie: result.data
+          });
+        })
+        .catch(err => {
+          console.log(err.response.data);
+        });
+    };
+  };
