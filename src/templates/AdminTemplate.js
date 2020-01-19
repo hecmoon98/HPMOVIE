@@ -15,7 +15,7 @@ export default function AdminTemplate({ Component, ...props }) {
     <Route
       {...props}
       render={propsComponent => {
-        if (localStorage.getItem("UserAdmin")) {
+        if (JSON.parse(localStorage.getItem("UserAdmin")).maLoaiNguoiDung==="QuanTri") {
           return (
             <AdminLayout>
               <Component {...propsComponent} />

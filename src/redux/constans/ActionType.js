@@ -13,3 +13,5 @@ export const LOADING = "LOADING";
 export const GET_LIST_PHONG_VE = "GET_LIST_PHONG_VE";
 
 export const POST_DAT_VE = "POST_DAT_VE";
+
+export const POST_DANG_NHAP_HOME = "POST_DANG_NHAP_HOME";

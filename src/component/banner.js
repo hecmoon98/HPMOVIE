@@ -9,17 +9,21 @@ class Banner extends Component {
     this.state = {
       movie: "Mời Bạn Chon Phim...",
       movieTF: false,
+      movieTFF: false,
 
       getRapPhim:"",
       rapPhim: "Rap Phim",
       rapPhimTF: false,
+      rapPhimTFF: false,
 
       getNgayXem:"",
         ngayXem: "Ngày Xem",
       ngayXemTF: false,
+      ngayXemTFF: false,
 
       suatChieu: "Suất Chiếu",
       suatChieuTF: false,
+      suatChieuTFF: false,
       maLichChieu:""
     };
   }
@@ -27,6 +31,8 @@ class Banner extends Component {
   handlMovie = (movie, maphim, movieTF) => {
     this.props.getRapPhim(maphim);
     this.setState({
+      rapPhimTF: true,
+      movieTFF: true,
       movie,
       movieTF,
     });
@@ -48,6 +54,8 @@ class Banner extends Component {
       getRapPhim:rapPhim,
       rapPhim,
       rapPhimTF,
+      rapPhimTFF:true,
+      ngayXemTF: true,
     });
   }
 
@@ -70,8 +78,9 @@ class Banner extends Component {
     this.setState({
       getNgayXem:ngayXem,
         ngayXem,
-        ngayXemTF
-     
+        ngayXemTF,
+        ngayXemTFF:true,
+        suatChieuTF: true,
     });
   }
 
@@ -102,6 +111,7 @@ class Banner extends Component {
     this.setState({
       suatChieu,
         suatChieuTF,
+        suatChieuTFF:true,
         maLichChieu
      
     });
@@ -153,9 +163,6 @@ class Banner extends Component {
 
         return r;
       }, []);
-
-
-
 
 
   
@@ -325,7 +332,9 @@ class Banner extends Component {
 
 
   render() {
-    console.log(this.props.rapMovie);
+ 
+    let muaVeNgay = this.state.movieTFF && this.state.ngayXemTFF && this.state.suatChieuTFF && this.state.rapPhimTFF
+   
     return (
       <section className="banner">
         <div id="carouselId" className="carousel slide" data-ride="carousel">
@@ -442,7 +451,7 @@ class Banner extends Component {
               </li>
               <li className="tab__li_1">
               <Link to={`/ticket-movie/${this.state.maLichChieu}`} className="btn ">
-                <button to={`/ticket-movie/${this.state.maLichChieu}`} className="btn ">
+                <button disabled={!muaVeNgay} to={`/ticket-movie/${this.state.maLichChieu}`} className="btn ">
                   MUA VÉ NGAY
                 </button>
                 </Link>

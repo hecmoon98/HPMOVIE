@@ -8,7 +8,7 @@ class Cinema extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      keyRap: "",
+      keyRap: 0,
       maCumRap: "",
       maLichChieu: "",
       tenCumRap: "",
@@ -21,6 +21,7 @@ class Cinema extends Component {
   }
 
   keyRap = (keyRap, maCumRap) => {
+    console.log(maCumRap)
     this.props.getlistCinema(maCumRap, maCumRap);
     this.setState({
       keyRap: keyRap,

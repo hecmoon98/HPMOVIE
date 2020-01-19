@@ -183,3 +183,51 @@ export const actDatVe = (user) => {
         });
     };
   };
+
+
+//   export const actDangNhapHome = (user) => {
+
+//     const UserAdmin = JSON.parse(localStorage.getItem("UserAdmin"));
+  
+//     return dispatch => {
+//       Axios({
+//         method: "POST",
+//         url:"http://movie0706.cybersoft.edu.vn/api/QuanLyDatVe/DatVe",
+//         data: user,
+//         headers: {
+//           Authorization: `Bearer ${UserAdmin.accessToken}` 
+//         }
+//       })
+//         .then(result => {
+//           dispatch({
+//             type: ActionType.POST_DAT_VE,
+//             listMovie: result.data
+//           });
+//         })
+//         .catch(err => {
+//           console.log(err.response.data);
+//         });
+//     };
+//   };
+
+
+  export const actDangNhapHome = (user, history) => {
+    return dispatch => {
+        Axios({
+            method: "POST",
+            url: "http://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/DangNhap",
+            data: user
+        })
+            .then(result => {
+               
+       
+                    localStorage.setItem("UserAdmin", JSON.stringify(result.data));
+                    alert("Login success");
+                    history.push("/");
+              
+            })
+            .catch(err => {
+                console.log(err.response.data);
+            });
+    };
+};

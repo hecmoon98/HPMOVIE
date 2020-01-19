@@ -17,7 +17,7 @@ const movieReducer = (state = initialState, action) => {
         case ActionType.GET_LIST_MOVIE:
             state.listMovie = action.listMovie;
 
-            return { ...state }
+            return { ...state,loading: false }
 
 
         case ActionType.GET_DETAIL_MOVIE:

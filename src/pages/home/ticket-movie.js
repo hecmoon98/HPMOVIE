@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as action from "./../../redux/action";
-import { Link } from "react-router-dom"; 
+import { Link } from "react-router-dom";
+import ReactDOM from 'react-dom';
+import Countdown from 'react-countdown-now';
 
 class TicketMovie extends Component {
   constructor(props) {
@@ -9,7 +11,8 @@ class TicketMovie extends Component {
     this.state = {
       maLichChieu: "",
       danhSachVe: [],
-      taiKhoanNguoiDung: "vipadmin"
+      taiKhoanNguoiDung: "",
+      soGhe: []
     };
   }
   componentDidMount() {
@@ -22,17 +25,48 @@ class TicketMovie extends Component {
     });
   }
 
-  clickActi = (maGhe, giaVe) => {
-    console.log(maGhe, giaVe);
+  clickActi = (maGhe, giaVe, soGhe) => {
     const objMaGhe = {
       maGhe,
       giaVe
     };
 
-    // let danhSachVe = [...this.state.danhSachVe];
-    let danhSachVe = [...this.state.danhSachVe, objMaGhe];
+    const objsoGhe = {
+      soGhe
+    };
+
+    let danhSachSoGhe = [...this.state.soGhe];
+
+    let danhSachVe = [...this.state.danhSachVe];
+
+    let index = danhSachVe.findIndex(item => item.maGhe === maGhe);
+
+    let index2 = danhSachSoGhe.findIndex(item => item.soGhe === soGhe);
+
+    if (index !== -1) {
+      danhSachVe.splice(index, 1);
+      this.setState({
+        danhSachVe
+      });
+    } else {
+      danhSachVe = [...this.state.danhSachVe, objMaGhe];
+    }
+
+    if (index2 !== -1) {
+      console.log(index);
+      danhSachSoGhe.splice(index2, 1);
+      this.setState({
+        soGhe: danhSachSoGhe,
+      });
+    } else {
+      danhSachSoGhe = [...this.state.soGhe, objsoGhe];
+    }
+
+
     this.setState({
-      danhSachVe
+      soGhe: danhSachSoGhe,
+      danhSachVe 
+
     });
   };
 
@@ -87,23 +121,20 @@ class TicketMovie extends Component {
           }
         }
 
-        
-
         return (
           <div key={index} className="styleGhe">
             <label className={classGhe}>
               <input
                 onClick={() => {
-                  this.clickActi(item.maGhe, item.giaVe);
+                  this.clickActi(item.maGhe, item.giaVe, item.tenGhe);
                 }}
                 type="checkbox"
                 defaultChecked="checked"
               />
 
               <span className="checkmark">
-                  <div className="checkmark__detail">{item.tenGhe}</div>
+                <div className="checkmark__detail">{item.tenGhe}</div>
               </span>
-              
             </label>
           </div>
         );
@@ -112,12 +143,31 @@ class TicketMovie extends Component {
   };
 
   handMuaVe = state => {
+    let tenAD = JSON.parse(localStorage.getItem("UserAdmin"));
     console.log(state);
-    this.props.postDatVe(state);
+
+    if (tenAD) {
+      this.setState({
+        taiKhoanNguoiDung: tenAD.taiKhoan
+      });
+      this.props.postDatVe(state);
+    }
   };
   renderlistPhim = () => {
     if (this.props.listPhongVe.thongTinPhim) {
       const { thongTinPhim } = this.props.listPhongVe;
+
+      let tenAD = JSON.parse(localStorage.getItem("UserAdmin"));
+
+      let linkMuaVe = "";
+      let muaVe = "";
+      if (tenAD) {
+        linkMuaVe = "/ticket";
+        muaVe = "Mua Vé";
+      } else {
+        linkMuaVe = "/signin";
+        muaVe = "Hãy Đăng Nhập";
+      }
 
       return (
         <section className="rightticket">
@@ -136,7 +186,9 @@ class TicketMovie extends Component {
                   <span>Ghế</span>
                 </div>
                 <div className="totalchair col-sm-5">
-                  <span>A1, A2</span>
+                  {this.state.soGhe.map((item, index) => {
+                    return <span style={{color: "#fb4226"}} key={index}>{item.soGhe}/</span>;
+                  })}
                 </div>
               </div>
             </div>
@@ -146,26 +198,28 @@ class TicketMovie extends Component {
                   <span>Tổng tiền</span>
                 </div>
                 <div className="money col-sm-5">
-                  <span>220.000đ</span>
+                <span >{this.state.danhSachVe.reduce((tong,item)=>{
+                    return  tong +=item.giaVe
+                  },0)}đ</span>
                 </div>
               </div>
             </div>
           </div>
-<Link to={`/ticket`}>
-          <div
+          <Link
+            to={linkMuaVe}
             onClick={() => {
               this.handMuaVe(this.state);
             }}
-            className="buyticket"
           >
-            Mua Vé
-          </div>
-
+            <div className="buyticket">{muaVe}</div>
           </Link>
         </section>
       );
     }
   };
+
+
+ 
 
   render() {
     let { loading } = this.props;
@@ -174,21 +228,52 @@ class TicketMovie extends Component {
     if (loading) {
       return (
         <div className="loading">
-          <div class="loader"></div>
+          <div className="loader" />
         </div>
       );
     }
+
+    // const Completionist = () => <span>You are good to go!</span>;
+
+// Renderer callback with condition
+const renderer = ({ minutes, seconds, completed }) => {
+  if (completed) {
+    // Render a complete state
+    // return <Completionist />;
+
+    window.location.reload()
+
+ 
+  } else {
+    // Render a countdown
+    return <span style={{
+      color: "#E9204F",
+      fontSize:"29px"
+      
+
+      }}  >{minutes}:{seconds}</span>;
+  }
+};
 
     return (
       <div className="ticKet">
         <section className="headerticket">
           <div className="stepcheckout">
+          
             <ul>
               <li className="active">
                 <span className="stepnumber">01</span>CHỌN GHẾ &amp; THANH TOÁN
               </li>
               <li>
                 <span className="stepnumber">02</span>KẾT QUẢ ĐẶT VÉ
+              </li>
+              <li>
+                <span className="stepnumber"></span>
+                <Countdown
+    date={Date.now() + 300000}
+    renderer={renderer}
+  />
+
               </li>
             </ul>
           </div>
@@ -198,7 +283,7 @@ class TicketMovie extends Component {
             <img
               className="namescreen"
               src="https://tix.vn/app/assets/img/icons/screen.png"
-              alt
+              alt="#123"
             />
           </div>
           <div className="tableGhe">
@@ -223,7 +308,6 @@ class TicketMovie extends Component {
                 <span className="colorseat colorchosen" />
                 <span className="name">Ghế đã chọn</span>
               </span>
-             
             </div>
           </div>
         </section>
@@ -249,6 +333,7 @@ const mapDispatchToProps = dispatch => {
     setLoading: () => {
       dispatch(action.actLoading());
     },
+
     postDatVe: user => {
       dispatch(action.actDatVe(user));
     }

@@ -5,6 +5,7 @@ import Dashboard from "./pages/admin/Dashboard";
 import ThemNguoiDung from "./pages/admin/ThemNguoiDung";
 import TicketMovie from "./pages/home/ticket-movie";
 import Ticket from "./pages/home/Ticket";
+import SignIn from "./pages/home/login";
 
 
 
@@ -31,6 +32,11 @@ const routesHome = [
     path: "/ticket",
     exact: false,
     component: Ticket
+  },
+  {
+    path: "/signin",
+    exact: false,
+    component: SignIn
   },
 
 ];
