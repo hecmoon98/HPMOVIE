@@ -12,10 +12,10 @@
             .nav-item{
                 .nav-link.active{
                     
-                        color: $ZIGZAG-1-hex;
-                        background-color: transparent;
-                        border-color:transparent;
-                        border-bottom: 1px solid $ZIGZAG-1-hex;
+                        color: $ZIGZAG-1-hex !important;
+                        background-color: transparent !important;
+                        border-color:transparent !important;
+                        border-bottom: 2px solid $ZIGZAG-1-hex !important; 
                        
 
                     
@@ -23,15 +23,15 @@
                 .nav-link{
                     font-size: 24px;
                     margin: 0px 20px;
-                    color: black;
+                    color: black !important;
                     padding: 0;
-                    transition: all 0.5s;
+                    transition: all 0.2s !important;
 
 
                     &:hover{
-                        color: $ZIGZAG-1-hex;
-                        border-color:transparent;
-                        border-bottom: 1px solid $ZIGZAG-1-hex;
+                        color: $ZIGZAG-1-hex !important;
+                        border-color:transparent !important;
+                        border-bottom: 2px solid $ZIGZAG-1-hex !important;
                     }
                 }
             }

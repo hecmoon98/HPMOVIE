@@ -6,6 +6,12 @@ import ThemNguoiDung from "./pages/admin/ThemNguoiDung";
 import TicketMovie from "./pages/home/ticket-movie";
 import Ticket from "./pages/home/Ticket";
 import SignIn from "./pages/home/login";
+import detailNew from "./pages/home/detail-new";
+
+
+import adminNews from "./pages/admin-news/page/admin-news";
+import adminNewsUser from "./pages/admin-news/page/admin-user";
+
 
 
 
@@ -39,6 +45,12 @@ const routesHome = [
     component: SignIn
   },
 
+  {
+    path: "/detail-news/:id",
+    exact: false,
+    component: detailNew
+  }, 
+
 ];
 
 const routesAdmin = [
@@ -55,4 +67,19 @@ const routesAdmin = [
 ];
 
 
-export { routesHome, routesAdmin };
+const routesAdminNews = [
+  {
+    path: "/admin-news",
+    exact: false,
+    component: adminNews
+  },
+  {
+    path: "/admin-user",
+    exact: false,
+    component: adminNewsUser
+  },
+  
+];
+
+
+export { routesHome, routesAdmin,routesAdminNews };

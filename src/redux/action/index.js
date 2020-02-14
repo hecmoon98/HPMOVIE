@@ -107,28 +107,7 @@ export const actThongTinLichChieu = (cumRap) => {
     }
 }
 
-export const actLoginAdmin = (user, history) => {
-    return dispatch => {
-        Axios({
-            method: "POST",
-            url: "http://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/DangNhap",
-            data: user
-        })
-            .then(result => {
-                console.log(result.data);
-                if (result.data.maLoaiNguoiDung === "QuanTri") {
-                    localStorage.setItem("UserAdmin", JSON.stringify(result.data));
-                    alert("Login success");
-                    history.push("/dashboard");
-                } else {
-                    alert("K co quyen vao he thong");
-                }
-            })
-            .catch(err => {
-                console.log(err.response.data);
-            });
-    };
-};
+
 export const actLoading = () => {
     return {
         type: ActionType.LOADING,
@@ -172,15 +151,12 @@ export const actDatVe = (user) => {
           Authorization: `Bearer ${UserAdmin.accessToken}` 
         }
       })
-        .then(result => {
-          dispatch({
-            type: ActionType.POST_DAT_VE,
-            listMovie: result.data
-          });
-        })
-        .catch(err => {
-          console.log(err.response.data);
-        });
+      .then(result => {
+        console.log(result.data);
+      })
+      .catch(err => {
+        console.log(err.response.data);
+      });
     };
   };
 
@@ -231,3 +207,187 @@ export const actDatVe = (user) => {
             });
     };
 };
+
+
+export const actGetNewsCategory = () => {
+    return dispatch => {
+        Axios({
+            method: "GET",
+            url: "http://localhost:3002/category/",
+          
+        })
+        .then(result => {
+            dispatch({
+              type: ActionType.GET_NEWS_CATEGORY,
+              listCategory: result.data
+            });
+          })
+          .catch(err => {
+            console.log(err);
+          });
+    };
+};
+export const actGetNews = () => {
+    return dispatch => {
+        Axios({
+            method: "GET",
+            url: "http://localhost:3002/news/",
+          
+        })
+        .then(result => {
+            dispatch({
+              type: ActionType.GET_NEWS,
+              listNews: result.data
+            });
+          })
+          .catch(err => {
+            console.log(err);
+          });
+    };
+};
+
+
+
+export const actGetDetailNews = (id) => {
+    return dispatch => {
+        Axios({
+            method: "GET",
+            url: `http://localhost:3002/news/${id}`,
+
+        })
+            .then((result) => {
+           
+                dispatch({
+                    type: ActionType.GET_NEWS_DETAIL,
+                    NewsDetail: result.data
+                });
+
+            })
+            .catch((err) => {
+                console.log(err)
+            });
+    }
+}
+
+
+
+// export const actLoginAdmin = (user, history) => {
+//     console.log(user)
+//     return dispatch => {
+//         Axios({
+//             method: "POST",
+//             url: "http://localhost:3002/user/login",
+//             data: user
+//         })
+//             .then(result => {
+//                 console.log(result.data);
+                
+//             })
+//             .catch(err => {
+//                 console.log(err);
+//             });
+//     };
+// };
+
+
+
+export const actLoginAdmin = (user, history) => {
+    return dispatch => {
+      Axios({
+        method: "POST",
+        url: "http://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/DangNhap",
+        data: user
+      })
+        .then(result => {
+          console.log(result.data);
+         
+            if (result.data.maLoaiNguoiDung === "QuanTri") {
+                localStorage.setItem("UserAdmin", JSON.stringify(result.data));
+                alert("Login success");
+                history.push("/dashboard");
+              } else {
+                alert("K co quyen vao he thong");
+              }
+          
+        })
+        .catch(err => {
+          console.log(err.response.data);
+        });
+    };
+  };
+
+
+
+
+  export const actLoginNews = (user, history) => {
+    return dispatch => {
+      Axios({
+        method: "POST",
+        url: "http://localhost:3002/user/login",
+        data: user
+      })
+        .then(result => {
+          console.log(result.data);
+       
+            if (result.data.chucVu === "Quang Li") {
+                localStorage.setItem("UserAdmin", JSON.stringify(result.data));
+                alert("Login success");
+                history.push("/admin-news");
+              } else {
+                alert("K co quyen vao he thong");
+              }
+        
+        })
+        .catch(err => {
+          console.log(err.response.data);
+        });
+    };
+  };
+
+
+
+  export const actPostAdminNews = (user) => {
+    return dispatch => {
+        Axios({
+            method: "POST",
+            url: `http://localhost:3002/news/`,
+            data:user
+
+        })
+        .then(result => {
+           
+            dispatch({
+                type: ActionType.POST_ADMIN_NEWS,
+                postAdminNews: result.data.createdNews
+            });
+          })
+          .catch(err => {
+            console.log(err.response.data);
+          });
+    }
+}
+
+
+
+export const actDeleteAdminNews = (id,user) => {
+    return dispatch => {
+        Axios({
+            method: "DELETE",
+            url: `http://localhost:3002/news/${id}`,
+            
+       
+
+        })
+        .then(result => {
+            
+            dispatch({
+                type: ActionType.DELETE_ADMIN_NEWS,
+                user
+            });
+            
+          })
+          .catch(err => {
+            console.log(err);
+          });
+    }
+}

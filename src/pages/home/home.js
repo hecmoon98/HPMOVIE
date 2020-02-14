@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Banner from "./../../component/banner";
 import Movie from "./../../component/movie";
 import Cinema from "./../../component/cinema";
+import News from "./../../component/news";
 import { connect } from "react-redux";
 import * as action from "../../redux/action";
 
@@ -31,6 +32,7 @@ class Home extends Component {
                 <Movie />
                 
                 <Cinema />
+                <News />
 
 
             </div>

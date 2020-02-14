@@ -456,6 +456,7 @@ class DetailMovie extends Component {
                 <div className="tab-pane fade" id="menu1"></div>
               </div>
             </div>
+            
           </section>
         </div>
       </div>

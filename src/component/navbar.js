@@ -28,8 +28,6 @@ export default class NavBar extends Component {
     </div>
     <ul>
       <li><NavLink exact activeClassName="active" to="/">Home</NavLink></li>
-      {/* <li><a href="#cumrap">cum rạp</a></li>
-      <li><a href="#">tin tức</a></li> */}
       <li><NavLink   to="/signin">{dangnhap}</NavLink></li>
       {LI}
       

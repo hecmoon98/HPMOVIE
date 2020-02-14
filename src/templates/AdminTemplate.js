@@ -15,25 +15,23 @@ export default function AdminTemplate({ Component, ...props }) {
     <Route
       {...props}
       render={propsComponent => {
-        if (JSON.parse(localStorage.getItem("UserAdmin")).maLoaiNguoiDung==="QuanTri") {
-          return (
-            <AdminLayout>
-              <Component {...propsComponent} />
-            </AdminLayout>
-          );
+        if (JSON.parse(localStorage.getItem("UserAdmin"))) {
+          if (
+            JSON.parse(localStorage.getItem("UserAdmin")).maLoaiNguoiDung ===
+            "QuanTri"
+          ) {
+            return (
+              <AdminLayout>
+                <Component {...propsComponent} />
+              </AdminLayout>
+            );
+          } else {
+            return <Redirect to="/admin" />;
+          }
         } else {
           return <Redirect to="/admin" />;
         }
       }}
     />
-
-    // <Route
-    //     {...props}
-    //     render={propsComponent => (
-    //       <AdminLayout>
-    //         <Component {...propsComponent} />
-    //       </AdminLayout>
-    //     )}
-    //   />
   );
 }
