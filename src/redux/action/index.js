@@ -391,3 +391,25 @@ export const actDeleteAdminNews = (id,user) => {
           });
     }
 }
+
+
+export const actPutAdminNews = (id,user) => {
+    return dispatch => {
+        Axios({
+            method: "PUT",
+            url: `http://localhost:3002/news/${id}`,
+            data:user
+
+        })
+        .then(result => {
+           console.log(result);
+            // dispatch({
+            //     type: ActionType.POST_ADMIN_NEWS,
+            //     postAdminNews: result.data.createdNews
+            // });
+          })
+          .catch(err => {
+            console.log(err.response.data);
+          });
+    }
+}

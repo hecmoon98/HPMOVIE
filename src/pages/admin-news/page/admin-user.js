@@ -1,5 +1,5 @@
 import React from 'react';
-import NewsContent from "./../conponent/NewsContent2";
+import NewsContent from "../conponent/NewsContent";
 const NewUser = () => {
     return (
         <div className="wrapper">

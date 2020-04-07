@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import * as action from "./../../../redux/action";
+import * as action from "../../../redux/action";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -25,7 +25,8 @@ class NewsContent extends Component {
       newsContent2: "",
       newsContent3: "",
       categoryId: "none",
-      themSua:false
+      themSua:false,
+      idSua:""
     };
   }
 
@@ -79,11 +80,38 @@ class NewsContent extends Component {
       [name]: value
     });
   };
-  handleSua=()=>{
+  handleSua=(id)=>{
+    let mang;
+   if(this.props.listNews){
+   mang = this.props.listNews.filter(
+     item=>{
+       return item._id==id
+     })
+ 
+   }
+
+   console.log(mang[0])
+
     this.setState({
-      themSua:true
+      newsTrailer: mang[0].newsTrailer,
+      newsTitle: mang[0].newsTitle,
+      newsIntroduce: mang[0].newsIntroduce,
+      newsContent: mang[0].newsContent,
+      newsContent2: mang[0].newsContent2,
+      newsContent3: mang[0].newsContent3,
+      themSua:true,
+      idSua:id
     })
+
+
+    
+
+
+
+    
   }
+
+
 
   renderTable = () => {
     console.log(this.props.listNews);
@@ -114,7 +142,7 @@ class NewsContent extends Component {
             <td>{new_id}</td>
             <td>
               <Button
-              onClick={this.handleSua}
+              onClick={()=>{this.handleSua(item._id)}}
                 variant="contained"
                 color="primary"
                 type="button"
@@ -164,6 +192,73 @@ console.log("aaaaaaa")
     });
   };
 
+  renderFile = ()=>{
+    let imgFile=false
+    if(this.state.themSua){
+      imgFile=true;
+    }
+    return imgFile;
+  }
+
+
+  handSuaNew =(e)=>{
+    e.preventDefault();
+
+    let mang;
+    if(this.props.listNews){
+    mang = this.props.listNews.filter(
+      item=>{
+        return item._id==this.state.idSua
+      })
+  
+    }
+
+
+    const user = {
+    newsTrailer: this.state.newsTrailer,
+    newsTitle: this.state.newsTitle,
+    newsIntroduce: this.state.newsIntroduce,
+    newsContent: this.state.newsContent,
+    newsContent2: this.state.newsContent2,
+    newsContent3: this.state.newsContent3,
+    }
+
+    console.log(user)
+
+    this.props.putAdminNews(mang[0]._id,user);
+    
+  }
+
+
+
+
+  handleUpSua =()=>{
+    if(this.state.themSua){
+      return(
+        <Button
+                    onClick={this.handSuaNew}
+                    type="submit"
+                    color="primary"
+                    variant="contained"
+                    data-dismiss="modal"
+                  >
+                    Sửa Tin
+                  </Button>
+      )
+    }else{
+      return(
+        <Button
+                    onClick={this.fileUploadHandle2}
+                    type="submit"
+                    color="primary"
+                    variant="contained"
+                    data-dismiss="modal"
+                  >
+                    Upload
+                  </Button>
+      );
+    }
+  }
   
 
   render() {
@@ -195,16 +290,19 @@ console.log("aaaaaaa")
                 {/* Modal body */}
                 <div className="modal-body">
                   <form noValidate autoComplete="off">
+                  
                     <input
-                      type="file"
-                      name="newsImages"
-                      ref={ref=> this.fileInput = ref}
-                      onChange={this.fileSelectedHandler}
+                    type="file"
+                    name="newsImages"
+                    hidden={this.renderFile()}
+                    ref={ref=> this.fileInput = ref}
+                    onChange={this.fileSelectedHandler}
                     />
-        
+
                     <input
                       type="file"
                       name="newsImages2"
+                      hidden={this.renderFile()}
                       ref={ref=> this.fileInput2 = ref}
                       onChange={this.fileSelectedHandler}
                     />
@@ -212,10 +310,10 @@ console.log("aaaaaaa")
                     <input
                       type="file"
                       name="newsImages3"
+                      hidden={this.renderFile()}
                       ref={ref=> this.fileInput3 = ref}
                       onChange={this.fileSelectedHandler}
                     />
-                    
 
                     <TextField
                       label="newsTrailer"
@@ -274,6 +372,7 @@ console.log("aaaaaaa")
                       categoryId:
                     </InputLabel>
                     <select
+                     hidden={this.renderFile()}
                       onChange={this.handleOnChange}
                       name="categoryId"
                       id="cars"
@@ -299,15 +398,7 @@ console.log("aaaaaaa")
                     Thoát
                   </Button>
 
-                  <Button
-                    onClick={this.fileUploadHandle2}
-                    type="submit"
-                    color="primary"
-                    variant="contained"
-                    data-dismiss="modal"
-                  >
-                    Upload
-                  </Button>
+                  {this.handleUpSua()}
 
                
                 </div>
@@ -374,7 +465,10 @@ const mapDispatchToProps = dispatch => {
     },
     deleteNews: (id, user) => {
       dispatch(action.actDeleteAdminNews(id, user));
-    }
+    },
+    putAdminNews: (id, user) => {
+      dispatch(action.actPutAdminNews(id, user));
+    },
   };
 };
 

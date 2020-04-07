@@ -30,7 +30,6 @@ class Home extends Component {
             <div>
                 <Banner />
                 <Movie />
-                
                 <Cinema />
                 <News />
 

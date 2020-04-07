@@ -1,6 +1,6 @@
 import React from "react";
 import NewsNavbar from "./../conponent/news-navbar";
-import NewsContent from "./../conponent/NewsContent";
+import NewsContent from "../conponent/NewsContent";
 
 const AdminNews = () => {
   return (

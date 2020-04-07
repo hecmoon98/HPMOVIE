@@ -15,6 +15,7 @@ import Container from "@material-ui/core/Container";
 
 import * as action from "./../../redux/action";
 import { connect } from "react-redux";
+import Facebook from './../../component/facebook';
 
 
 function Copyright() {
@@ -135,6 +136,7 @@ function SignIn(props) {
             >
               Sign In
             </Button>
+            <Facebook/>
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
