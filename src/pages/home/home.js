@@ -12,6 +12,7 @@ class Home extends Component {
         this.props.setLoading()
     }
     
+    
     render() {
         let { loading } = this.props;
 

@@ -5,6 +5,7 @@ import Sidebar from "./../pages/admin-news/Sidebar";
 const AdminLayout = props => {
   return (
     <div>
+    Sidebar
       {/* Navbar Admin */}
       <Sidebar />
       {props.children}

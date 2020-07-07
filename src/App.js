@@ -52,12 +52,6 @@ function App() {
   return (
     <BrowserRouter>
     <div>
-  
-    
-   
-    
-
-
     <Switch>
    
 

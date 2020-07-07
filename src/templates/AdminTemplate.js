@@ -1,10 +1,14 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
+import Sidebar from "./../pages/admin-news/Sidebar";
+// import NewsNavbar from "./../pages/admin-news/conponent/news-navbar"
+
 
 const AdminLayout = props => {
   return (
     <div>
-      Navbar Admin
+      {/* Navbar Admin */}
+      <Sidebar />
       {props.children}
     </div>
   );

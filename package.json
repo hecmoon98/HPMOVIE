@@ -28,7 +28,8 @@
     "react-scripts": "3.3.0",
     "react-swipeable-views": "^0.13.6",
     "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "serve-build": "^0.1.0"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -339,7 +339,7 @@ export const actLoginAdmin = (user, history) => {
         
         })
         .catch(err => {
-          console.log(err.response.data);
+        //   console.log(err.response.data);
         });
     };
   };
@@ -411,5 +411,30 @@ export const actPutAdminNews = (id,user) => {
           .catch(err => {
             console.log(err.response.data);
           });
+    }
+}
+
+
+
+
+
+
+export const actGetListMovieAdmin = () => {
+    return dispatch => {
+        Axios({
+            method: "GET",
+            url: "http://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP01",
+
+        })
+            .then((result) => {
+                dispatch({
+                    type: ActionType.GET_LIST_MOVIE_ADMIN,
+                    listMovieAdmin: result.data
+                });
+
+            })
+            .catch((err) => {
+                console.log(err)
+            });
     }
 }

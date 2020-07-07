@@ -28,7 +28,7 @@ export default class OneMovie extends Component {
               <div  className="item__name">{movie.tenPhim}</div>
             </Link>
             <Link className="btn__buy" to={`/detail-movie/${movie.maPhim}`}>
-              <i className="fa fa-ticket-alt" />
+            <i class="fa fa-ticket-alt"></i>
               Mua Vé
             </Link>
           </div>

@@ -80,6 +80,8 @@ class NewsContent extends Component {
       [name]: value
     });
   };
+
+  
   handleSua=(id)=>{
     let mang;
    if(this.props.listNews){

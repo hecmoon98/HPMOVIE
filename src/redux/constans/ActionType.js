@@ -30,3 +30,8 @@ export const DELETE_ADMIN_NEWS = "DELETE_ADMIN_NEWS";
 
 
 
+export const GET_LIST_MOVIE_ADMIN = "GET_LIST_MOVIE_ADMIN";
+
+
+
+
